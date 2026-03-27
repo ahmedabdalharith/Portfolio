@@ -11,7 +11,7 @@ export default function ProjectCard({ project, index }) {
       whileHover={{ y: -8 }}
       className="bg-slate-900 border border-white/5 rounded-[2.5rem] p-8 flex flex-col gap-6 group relative overflow-hidden shadow-2xl transition-all duration-500 hover:border-[#3DDC84]/30"
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-3 font-sans">
         <div className="flex items-center gap-5">
             {project.iconUrl ? (
                 <img src={project.iconUrl} alt={project.title} className="w-14 h-14 rounded-2xl object-cover shadow-lg" />
@@ -78,3 +78,4 @@ export default function ProjectCard({ project, index }) {
     </motion.div>
   )
 }
+
