@@ -38,6 +38,12 @@ public class Project {
     @Column(name = "sort_order")
     private int sortOrder = 0;
 
+    @Column(name = "icon_url", columnDefinition = "TEXT")
+    private String iconUrl;
+
+    @Column(name = "app_id")
+    private String appId;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -49,7 +55,7 @@ public class Project {
     public Project() {
     }
 
-    public Project(String title, String category, String description, String techStack, String rating, String downloads, String playStoreUrl, int sortOrder) {
+    public Project(String title, String category, String description, String techStack, String rating, String downloads, String playStoreUrl, int sortOrder, String iconUrl, String appId) {
         this.title = title;
         this.category = category;
         this.description = description;
@@ -58,6 +64,12 @@ public class Project {
         this.downloads = downloads;
         this.playStoreUrl = playStoreUrl;
         this.sortOrder = sortOrder;
+        this.iconUrl = iconUrl;
+        this.appId = appId;
+    }
+
+    public Project(String title, String category, String description, String techStack, String rating, String downloads, String playStoreUrl, int sortOrder) {
+        this(title, category, description, techStack, rating, downloads, playStoreUrl, sortOrder, null, null);
     }
 
     public Long getId() { return id; }
@@ -78,6 +90,10 @@ public class Project {
     public void setPlayStoreUrl(String playStoreUrl) { this.playStoreUrl = playStoreUrl; }
     public int getSortOrder() { return sortOrder; }
     public void setSortOrder(int sortOrder) { this.sortOrder = sortOrder; }
+    public String getIconUrl() { return iconUrl; }
+    public void setIconUrl(String iconUrl) { this.iconUrl = iconUrl; }
+    public String getAppId() { return appId; }
+    public void setAppId(String appId) { this.appId = appId; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }

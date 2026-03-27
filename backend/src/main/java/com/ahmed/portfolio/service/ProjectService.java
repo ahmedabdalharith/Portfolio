@@ -11,9 +11,11 @@ import java.util.List;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final PlayStoreScraperService scraperService;
 
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository, PlayStoreScraperService scraperService) {
         this.projectRepository = projectRepository;
+        this.scraperService = scraperService;
     }
 
     @PostConstruct
@@ -27,8 +29,10 @@ public class ProjectService {
                     "Kotlin, Jetpack Compose, MVVM, Room, Firebase, Retrofit",
                     "4.9",
                     "5,000+",
+                    "https://play.google.com/store/apps/details?id=com.bnb.dafatery",
+                    1,
                     null,
-                    1
+                    "com.bnb.dafatery"
                 ),
                 new Project(
                     "TAS Travel — Umrah & Travel Booking",
@@ -38,7 +42,9 @@ public class ProjectService {
                     null,
                     null,
                     null,
-                    2
+                    2,
+                    null,
+                    null
                 ),
                 new Project(
                     "SheDrive — Women-Only Ride-Hailing",
@@ -48,7 +54,9 @@ public class ProjectService {
                     null,
                     null,
                     null,
-                    3
+                    3,
+                    null,
+                    null
                 ),
                 new Project(
                     "Kora Live — Live Football Streaming",
@@ -58,7 +66,9 @@ public class ProjectService {
                     null,
                     null,
                     null,
-                    4
+                    4,
+                    null,
+                    null
                 ),
                 new Project(
                     "Yalla Style Provider — On-Demand Salon Booking",
@@ -68,7 +78,9 @@ public class ProjectService {
                     null,
                     null,
                     null,
-                    5
+                    5,
+                    null,
+                    null
                 ),
                 new Project(
                     "PremierShare — Real Estate Marketplace",
@@ -78,7 +90,9 @@ public class ProjectService {
                     null,
                     null,
                     null,
-                    6
+                    6,
+                    null,
+                    null
                 )
             ));
         }
@@ -93,7 +107,22 @@ public class ProjectService {
             .orElseThrow(() -> new RuntimeException("Project not found: " + id));
     }
 
+    private void enrichWithPlayStoreData(Project project) {
+        if (project.getAppId() != null && !project.getAppId().trim().isEmpty()) {
+            PlayStoreScraperService.AppData data = scraperService.scrapeAppDetails(project.getAppId());
+            if (data != null) {
+                if (data.iconUrl != null) project.setIconUrl(data.iconUrl);
+                if (data.rating != null) project.setRating(data.rating);
+                if (data.downloads != null) project.setDownloads(data.downloads);
+                if (project.getPlayStoreUrl() == null || project.getPlayStoreUrl().isEmpty()) {
+                    project.setPlayStoreUrl("https://play.google.com/store/apps/details?id=" + project.getAppId());
+                }
+            }
+        }
+    }
+
     public Project create(Project project) {
+        enrichWithPlayStoreData(project);
         return projectRepository.save(project);
     }
 
@@ -103,10 +132,17 @@ public class ProjectService {
         existing.setCategory(updated.getCategory());
         existing.setDescription(updated.getDescription());
         existing.setTechStack(updated.getTechStack());
-        existing.setRating(updated.getRating());
-        existing.setDownloads(updated.getDownloads());
         existing.setPlayStoreUrl(updated.getPlayStoreUrl());
         existing.setSortOrder(updated.getSortOrder());
+        existing.setAppId(updated.getAppId());
+        
+        // If user manually changed rating/downloads/icon, keep it, otherwise scrape
+        if (updated.getRating() != null && !updated.getRating().isEmpty()) existing.setRating(updated.getRating());
+        if (updated.getDownloads() != null && !updated.getDownloads().isEmpty()) existing.setDownloads(updated.getDownloads());
+        if (updated.getIconUrl() != null && !updated.getIconUrl().isEmpty()) existing.setIconUrl(updated.getIconUrl());
+        
+        enrichWithPlayStoreData(existing);
+        
         return projectRepository.save(existing);
     }
 
