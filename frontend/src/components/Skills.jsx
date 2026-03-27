@@ -1,78 +1,46 @@
 import { motion } from 'framer-motion'
 
-const categories = [
-  {
-    icon: '💻',
-    title: 'Languages',
-    skills: ['Kotlin', 'Java', 'C++', 'Python'],
-  },
-  {
-    icon: '🚀',
-    title: 'Android SDK',
-    skills: ['Jetpack Compose', 'ViewModel', 'Coroutines', 'Flow', 'WorkManager', 'Room', 'DataStore', 'ExoPlayer', 'FCM'],
-  },
-  {
-    icon: '🏛️',
-    title: 'Architecture',
-    skills: ['MVVM', 'Clean Architecture', 'Repository Pattern', 'Hilt', 'Koin', 'MVP'],
-  },
-  {
-    icon: '🌐',
-    title: 'Cross-Platform',
-    skills: ['Compose Multiplatform', 'KMP', 'Android + iOS'],
-  },
-  {
-    icon: '🔗',
-    title: 'Networking',
-    skills: ['Retrofit', 'OkHttp', 'Ktor', 'REST APIs'],
-  },
-  {
-    icon: '⚡',
-    title: 'Real-Time',
-    skills: ['SignalR', 'Pusher', 'Agora SDK', 'Firebase Realtime DB'],
-  },
-  {
-    icon: '🗄️',
-    title: 'Database',
-    skills: ['Room', 'SQLite', 'Firebase Firestore', 'DataStore'],
-  },
-  {
-    icon: '🛠️',
-    title: 'Tools & DevOps',
-    skills: ['Android Studio', 'Git / GitHub', 'Gradle', 'Google Play Console', 'Firebase', 'CI/CD'],
-  },
+const skills = [
+  { category: 'Android Core', items: ['Kotlin', 'Java', 'Coroutines', 'Flow', 'Hilt / Koin', 'Room', 'DataStore'] },
+  { category: 'UI & Design', items: ['Jetpack Compose', 'Material Design 3', 'XML / View System', 'Framer Motion', 'Lottie Animations'] },
+  { category: 'Architecture', items: ['MVVM / MVI', 'Clean Architecture', 'Modularization', 'SOLID Principles', 'Unit Testing'] },
+  { category: 'Advanced', items: ['KMP (Multiplatform)', 'Google Play API', 'Payment Gateways', 'Maps & Location', 'CI/CD Pipelines'] },
 ]
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-32 relative">
+    <section id="skills" className="py-32 bg-[#020617] relative">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6 }}
+           initial={{ opacity: 0, scale: 0.9, y: 30 }}
+           whileInView={{ opacity: 1, scale: 1, y: 0 }}
+           viewport={{ once: true }} transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
           <p className="section-label">03 — Skills</p>
-          <h2 className="text-4xl lg:text-5xl font-black text-white mb-14">
-            Technical <span className="bg-gradient-to-r from-primary-400 to-accent bg-clip-text text-transparent">Skills</span>
+          <h2 className="text-4xl lg:text-7xl font-black text-white mb-16 tracking-tight leading-none">
+            Technical <span className="text-[#3DDC84]">Toolkit</span>
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {categories.map((cat, i) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {skills.map((group, idx) => (
             <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }}
-              whileHover={{ scale: 1.02, translateY: -4 }}
-              className="glass-card p-6 group cursor-default"
+              key={idx}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ type: "spring", stiffness: 300, damping: 20, delay: idx * 0.1 }}
+              className="bg-slate-900 border border-white/5 p-10 rounded-[2.5rem] hover:border-[#3DDC84]/20 transition-all duration-500 group"
             >
-              <div className="text-3xl mb-3">{cat.icon}</div>
-              <h4 className="text-white font-bold mb-3 group-hover:text-primary-400 transition-colors">{cat.title}</h4>
-              <div className="flex flex-wrap gap-1.5">
-                {cat.skills.map(s => (
-                  <span key={s} className="text-xs bg-dark-600 text-gray-400 border border-white/5 px-2 py-0.5 rounded-full">{s}</span>
+              <h3 className="text-[#3DDC84] font-black text-lg mb-8 uppercase tracking-widest leading-none">
+                {group.category}
+              </h3>
+              <ul className="space-y-4">
+                {group.items.map((skill, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-[#3DDC84] transition-colors" />
+                    <span className="text-slate-400 font-bold group-hover:text-white transition-colors text-sm">{skill}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
           ))}
         </div>

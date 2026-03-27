@@ -1,101 +1,86 @@
 import { motion } from 'framer-motion'
-import { Briefcase, MapPin, Calendar } from 'lucide-react'
+import { Briefcase } from 'lucide-react'
 
 const jobs = [
   {
     title: 'Android Developer',
     company: 'Project EGY',
+    period: 'Jan 2025 - Present',
     location: 'Cairo, Egypt',
-    period: 'Jan 2025 — Present',
-    bullets: [
-      'Built and shipped 7+ production Android apps to Google Play with 5,000+ combined downloads and sub-0.5% crash rate.',
-      'Delivered BNB Dafatery fintech app — 4.9★ rating across 162 verified reviews, Egypt\'s top personal finance app.',
-      'Built all UIs with Jetpack Compose, cutting UI development time by ~30% via reusable component libraries.',
-      'Developed TAS Travel as a Kotlin Multiplatform (KMP) app on both Google Play & Apple App Store (60%+ shared codebase).',
-      'Architected all projects with MVVM & Clean Architecture — zero-regression feature delivery.',
-      'Integrated SignalR, Pusher, and Agora SDK for real-time features supporting 100+ concurrent users.',
-      'Managed end-to-end Google Play Console submissions: signing, staged rollouts, listing optimization.',
+    achievements: [
+      'Built and shipped 7+ production Android apps using Kotlin and Java with 5,000+ combined downloads.',
+      'Delivered BNB Dafatery fintech app achieving a 4.9-star rating — ranked among Egypt\'s top personal finance apps.',
+      'Developed TAS Travel as a premium Compose Multiplatform (KMP/CMP) app published simultaneously on Android and iOS.',
+      'Architected projects using MVVM and Clean Architecture, enabling zero-regression feature delivery.',
+      'Integrated real-time features using SignalR, Pusher, and Agora SDK for live-streaming and ride-hailing apps.',
+      'Managed end-to-end Google Play Console submissions including app signing and Store listing optimization.'
     ],
-    tags: ['Kotlin', 'Jetpack Compose', 'MVVM', 'KMP', 'Hilt', 'Firebase', 'SignalR', 'Agora SDK'],
   },
   {
     title: 'Mobile Developer',
     company: 'Freelance',
+    period: 'Jan 2022 - Jan 2025',
     location: 'Remote',
-    period: 'Jan 2022 — Present',
-    bullets: [
-      'Delivered 5+ complete Android applications for clients across fintech, on-demand, and real estate — 100% on-time.',
-      'Designed reusable UI component libraries adopted across 3+ projects, reducing development time by ~25%.',
-      'Implemented real-time chat & push notifications via Firebase Cloud Messaging (1,000+ daily active users).',
-      'Managed full app lifecycle: requirements → architecture → development → QA → Google Play release.',
+    achievements: [
+      'Delivered 5+ complete Android applications for clients across fintech, on-demand services, and real estate.',
+      'Designed reusable UI component libraries and shared modules adopted across 3+ projects.',
+      'Implemented real-time chat and push notification services via Firebase Cloud Messaging.',
+      'Managed full app lifecycle independently: requirements, architecture, development, QA, and release.'
     ],
-    tags: ['Android', 'Firebase', 'FCM', 'REST APIs', 'Google Play', 'Full Lifecycle'],
   },
 ]
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-32 bg-dark-800/40 relative">
-      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+    <section id="experience" className="py-32 bg-[#020617] relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.6 }}
+           initial={{ opacity: 0, scale: 0.9, y: 30 }}
+           whileInView={{ opacity: 1, scale: 1, y: 0 }}
+           viewport={{ once: true }} transition={{ type: "spring", stiffness: 300, damping: 20 }}
         >
           <p className="section-label">02 — Experience</p>
-          <h2 className="text-4xl lg:text-5xl font-black text-white mb-14">
-            Work <span className="bg-gradient-to-r from-primary-400 to-accent bg-clip-text text-transparent">Experience</span>
+          <h2 className="text-4xl lg:text-7xl font-black text-white mb-16 tracking-tight leading-none">
+            Work <span className="text-[#3DDC84]">History</span>
           </h2>
         </motion.div>
 
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary-600/50 via-primary-800/30 to-transparent hidden md:block" />
+          <div className="absolute left-6 top-10 bottom-10 w-[2px] bg-slate-800 rounded-full hidden md:block" />
 
           <div className="space-y-12">
             {jobs.map((job, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.15 }}
+                viewport={{ once: true }} transition={{ type: "spring", stiffness: 300, damping: 20, delay: idx * 0.1 }}
                 className="md:pl-16 relative"
               >
-                {/* Timeline dot */}
-                <div className="absolute left-3.5 top-6 w-5 h-5 rounded-full bg-primary-600 border-2 border-primary-400 shadow-lg shadow-primary-500/40 hidden md:block" />
+                <div className="absolute left-[20px] top-10 w-4 h-4 rounded-full bg-slate-900 border-4 border-[#3DDC84] shadow-[0_0_15px_#3DDC8450] hidden md:block z-10" />
 
-                <div className="glass-card p-8">
-                  <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div className="bg-slate-900/50 border border-white/5 p-10 rounded-[3rem] backdrop-blur-md shadow-xl">
+                  <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
                     <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <Briefcase size={16} className="text-primary-400" />
-                        <h3 className="text-xl font-bold text-white">{job.title}</h3>
+                      <div className="flex items-center gap-4 mb-2">
+                        <div className="w-12 h-12 rounded-2xl bg-[#3DDC84]/10 flex items-center justify-center text-[#3DDC84]">
+                           <Briefcase size={22} />
+                        </div>
+                        <h3 className="text-2xl font-black text-white tracking-tight">{job.title}</h3>
                       </div>
-                      <div className="text-primary-400 font-semibold text-lg">{job.company}</div>
+                      <div className="text-[#3DDC84] font-black text-xl md:ml-16 leading-none">{job.company}</div>
+                      <div className="text-slate-500 font-bold text-sm md:ml-16 mt-2 uppercase tracking-widest">{job.location}</div>
                     </div>
-                    <div className="text-right flex flex-col items-end gap-1">
-                      <div className="flex items-center gap-1.5 text-gray-400 text-sm">
-                        <Calendar size={13} />
-                        {job.period}
-                      </div>
-                      <div className="flex items-center gap-1.5 text-gray-500 text-sm">
-                        <MapPin size={13} />
-                        {job.location}
-                      </div>
-                    </div>
+                    <div className="bg-white/5 border border-white/10 px-6 py-2 rounded-full text-slate-400 font-black text-sm uppercase tracking-widest">{job.period}</div>
                   </div>
-
-                  <ul className="space-y-2.5 mb-6">
-                    {job.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0 mt-2" />
-                        {b}
+                  
+                  <ul className="space-y-3 md:ml-16">
+                    {job.achievements.map((achievement, i) => (
+                      <li key={i} className="flex items-start gap-3 text-slate-400 text-lg leading-relaxed font-bold">
+                        <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#3DDC84] shrink-0" />
+                        {achievement}
                       </li>
                     ))}
                   </ul>
-
-                  <div className="flex flex-wrap gap-2">
-                    {job.tags.map(t => <span key={t} className="tag">{t}</span>)}
-                  </div>
                 </div>
               </motion.div>
             ))}

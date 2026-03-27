@@ -21,11 +21,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           position="top-right"
           toastOptions={{
             style: {
-              background: '#111827',
-              color: '#f3f4f6',
-              border: '1px solid rgba(99,102,241,0.3)',
+              background: '#ffffff',
+              color: '#334155',
+              border: '1px solid rgba(61,220,132,0.2)',
+              borderRadius: '1rem',
+              fontWeight: '600',
+              padding: '16px',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.05)',
             },
-            success: { iconTheme: { primary: '#6366f1', secondary: '#fff' } },
+            success: { iconTheme: { primary: '#3DDC84', secondary: '#fff' } },
           }}
         />
       </BrowserRouter>

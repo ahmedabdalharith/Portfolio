@@ -1,83 +1,80 @@
 import { motion } from 'framer-motion'
-import { ExternalLink, Star, Download } from 'lucide-react'
+import { ExternalLink, Github, Star, Download } from 'lucide-react'
 
-export default function ProjectCard({ project, index = 0 }) {
+export default function ProjectCard({ project, index }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.95, y: 30 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08 }}
-      whileHover={{ scale: 1.02, translateY: -6 }}
-      className="glass-card p-6 flex flex-col gap-4 group relative overflow-hidden"
+      transition={{ type: "spring", stiffness: 300, damping: 24, delay: index * 0.08 }}
+      whileHover={{ y: -8 }}
+      className="bg-slate-900 border border-white/5 rounded-[2.5rem] p-8 flex flex-col gap-6 group relative overflow-hidden shadow-2xl transition-all duration-500 hover:border-[#3DDC84]/30"
     >
-      {/* Gradient accent */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary-600/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-      {/* Header */}
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
             {project.iconUrl ? (
-                <img src={project.iconUrl} alt={project.title} className="w-12 h-12 rounded-xl object-cover border border-slate-700 shadow-lg" />
+                <img src={project.iconUrl} alt={project.title} className="w-14 h-14 rounded-2xl object-cover shadow-lg" />
             ) : (
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-900 to-accent/20 border border-primary-500/20 flex items-center justify-center text-primary-400 font-bold text-lg">
+                <div className="w-14 h-14 rounded-2xl bg-slate-800 text-[#3DDC84] font-black text-xl flex items-center justify-center">
                     {project.title.charAt(0)}
                 </div>
             )}
-            <h3 className="text-white font-bold text-lg leading-tight group-hover:text-primary-400 transition-colors">
+          <div>
+            <h3 className="text-xl font-black text-white group-hover:text-[#3DDC84] transition-colors tracking-tight leading-none">
               {project.title}
             </h3>
+            {project.category && (
+              <span className="text-[10px] font-black text-slate-500 mt-2 block uppercase tracking-widest">
+                {project.category}
+              </span>
+            )}
+          </div>
         </div>
-        {project.playStoreUrl && (
-          <a
-            href={project.playStoreUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="shrink-0 w-8 h-8 rounded-lg bg-primary-600/20 border border-primary-500/20 flex items-center justify-center text-primary-400 hover:bg-primary-600/40 transition"
-          >
-            <ExternalLink size={14} />
-          </a>
-        )}
       </div>
 
-      {/* Category badge */}
-      {project.category && (
-        <span className="self-start text-xs font-mono bg-accent/10 text-accent border border-accent/20 px-2.5 py-0.5 rounded-full">
-          {project.category}
-        </span>
-      )}
-
-      {/* Metrics row */}
-      {(project.rating || project.downloads) && (
-        <div className="flex items-center gap-4 text-sm">
-          {project.rating && (
-            <div className="flex items-center gap-1 text-yellow-400 font-semibold">
-              <Star size={14} fill="currentColor" />
-              {project.rating}
-            </div>
-          )}
-          {project.downloads && (
-            <div className="flex items-center gap-1 text-gray-400">
-              <Download size={13} />
-              {project.downloads}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Description */}
-      <p className="text-gray-400 text-sm leading-relaxed flex-1">
+      <p className="text-slate-400 text-sm leading-relaxed flex-grow font-bold">
         {project.description}
       </p>
 
-      {/* Tech tags */}
       {project.techStack && (
-        <div className="flex flex-wrap gap-1.5">
-          {project.techStack.split(',').map(t => (
-            <span key={t.trim()} className="tag">{t.trim()}</span>
+        <div className="flex flex-wrap gap-2.5 pt-2">
+          {project.techStack.split(',').map((tech, i) => (
+            <span key={i} className="tag text-[9px] px-3.5 py-1.5 uppercase font-black tracking-widest">
+              {tech.trim()}
+            </span>
           ))}
         </div>
       )}
+
+      <div className="flex items-center justify-between pt-6 mt-auto border-t border-white/5">
+        <div className="flex gap-5">
+            {project.rating && (
+                <div className="flex items-center gap-2 text-white text-xs font-black">
+                    <Star size={14} className="text-yellow-400 fill-yellow-400" />
+                    {project.rating}
+                </div>
+            )}
+            {project.downloads && (
+                <div className="flex items-center gap-2 text-slate-500 text-xs font-black uppercase">
+                    <Download size={14} />
+                    {project.downloads}
+                </div>
+            )}
+        </div>
+        <div className="flex gap-2">
+          {project.githubUrl && (
+            <a href={project.githubUrl} target="_blank" rel="noreferrer" className="w-11 h-11 flex items-center justify-center rounded-2xl bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white transition-all">
+              <Github size={20} />
+            </a>
+          )}
+          {project.playStoreUrl && (
+            <a href={project.playStoreUrl} target="_blank" rel="noreferrer" className="w-11 h-11 flex items-center justify-center rounded-2xl bg-[#3DDC84]/10 text-[#3DDC84] hover:bg-[#3DDC84]/20 hover:scale-110 active:scale-95 transition-all">
+              <ExternalLink size={20} />
+            </a>
+          )}
+        </div>
+      </div>
     </motion.div>
   )
 }

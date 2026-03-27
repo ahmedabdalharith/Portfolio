@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { login } from '../api/projects'
 import { motion } from 'framer-motion'
-import { Lock, User, Eye, EyeOff, LogIn } from 'lucide-react'
+import { Lock, User, Eye, EyeOff, LogIn, ArrowLeft } from 'lucide-react'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -19,97 +19,97 @@ export default function Login() {
       toast.success('Welcome back, Ahmed!')
       navigate('/dashboard')
     },
-    onError: () => toast.error('Invalid credentials'),
+    onError: () => toast.error('البيانات غير صحيحة'),
   })
 
   const onSubmit = (data) => mutation.mutate(data)
 
   return (
-    <div className="min-h-screen bg-dark-900 flex items-center justify-center px-4 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
-      <div className="absolute top-1/3 left-1/3 w-96 h-96 rounded-full bg-primary-800/20 blur-3xl" />
-
+    <div className="min-h-screen bg-[#020617] flex items-center justify-center px-4 relative overflow-hidden">
+      {/* Dynamic Background Blobs */}
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#3DDC84]/10 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-[#3DDC84]/5 rounded-full blur-[100px]" />
+      
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
         className="relative z-10 w-full max-w-md"
       >
-        {/* Back link */}
-        <a href="/" className="flex items-center gap-2 text-gray-500 hover:text-gray-300 text-sm mb-8 transition">
-          ← Back to Portfolio
-        </a>
+        <button 
+          onClick={() => navigate('/')} 
+          className="flex items-center gap-2 text-slate-500 hover:text-[#3DDC84] text-sm mb-8 transition-colors group font-bold"
+        >
+          <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+          Back to Portfolio
+        </button>
 
-        <div className="glass-card p-10">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-primary-600/20 border border-primary-500/30 flex items-center justify-center mx-auto mb-4">
-              <Lock size={28} className="text-primary-400" />
+        <div className="glass-card p-10 md:p-12">
+          {/* Brand Icon */}
+          <div className="text-center mb-10">
+            <div className="w-20 h-20 rounded-[2rem] bg-slate-950 border border-white/5 shadow-2xl flex items-center justify-center mx-auto mb-6 relative group">
+              <div className="absolute inset-0 bg-[#3DDC84]/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Lock size={32} className="text-[#3DDC84] relative z-10" />
             </div>
-            <h1 className="text-2xl font-black text-white">Dashboard Login</h1>
-            <p className="text-gray-500 text-sm mt-1">Admin access only</p>
+            <h1 className="text-3xl font-black text-white tracking-tight">System Login</h1>
+            <p className="text-slate-500 text-sm mt-2 font-bold uppercase tracking-widest text-[10px]">Administrative Access Only</p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Username */}
-            <div>
-              <label className="text-gray-400 text-sm font-medium block mb-2">Username</label>
-              <div className="relative">
-                <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Username</label>
+              <div className="relative group">
+                <User size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-[#3DDC84] transition-colors" />
                 <input
                   id="username"
                   type="text"
-                  placeholder="admin"
+                  placeholder="Enter username"
                   autoComplete="username"
                   {...register('username', { required: 'Username is required' })}
-                  className="input-field pl-10"
+                  className="input-field pl-14 bg-slate-950/50"
                 />
               </div>
-              {errors.username && <p className="text-red-400 text-xs mt-1">{errors.username.message}</p>}
+              {errors.username && <p className="text-red-400 text-[11px] mt-1 font-bold ml-1">{errors.username.message}</p>}
             </div>
 
-            {/* Password */}
-            <div>
-              <label className="text-gray-400 text-sm font-medium block mb-2">Password</label>
-              <div className="relative">
-                <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] ml-1">Password</label>
+              <div className="relative group">
+                <Lock size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-[#3DDC84] transition-colors" />
                 <input
                   id="password"
                   type={showPass ? 'text' : 'password'}
                   placeholder="••••••••"
                   autoComplete="current-password"
                   {...register('password', { required: 'Password is required' })}
-                  className="input-field pl-10 pr-10"
+                  className="input-field pl-14 pr-14 bg-slate-950/50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass(!showPass)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+                  className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-600 hover:text-white transition-colors"
                 >
-                  {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
-              {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password.message}</p>}
+              {errors.password && <p className="text-red-400 text-[11px] mt-1 font-bold ml-1">{errors.password.message}</p>}
             </div>
 
             <button
               id="loginBtn"
               type="submit"
               disabled={mutation.isPending}
-              className="btn-primary w-full justify-center mt-2"
+              className="btn-primary w-full justify-center mt-4 group overflow-hidden"
             >
               {mutation.isPending ? (
-                <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span className="w-5 h-5 border-[3px] border-slate-950/30 border-t-slate-950 rounded-full animate-spin" />
               ) : (
-                <><LogIn size={16} /> Sign In</>
+                <>
+                  Sign In 
+                  <LogIn size={18} strokeWidth={3} className="transition-transform group-hover:translate-x-1" />
+                </>
               )}
             </button>
           </form>
-
-          <p className="text-center text-gray-600 text-xs mt-6">
-            Default: admin / admin123
-          </p>
         </div>
       </motion.div>
     </div>
