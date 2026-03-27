@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+target/
+*.class
+
+# Build artifacts
+frontend/dist/
+*.jar
+*.war
+
+# DB files
+data/
+*.db
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
