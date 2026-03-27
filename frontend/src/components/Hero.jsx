@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, Mail, Phone, ArrowDown } from 'lucide-react'
+import MobileMockup from './MobileMockup'
 
 const WORDS = [
   'Android Apps',
@@ -164,57 +165,11 @@ export default function Hero() {
         >
           <div className="relative">
             <div className="animate-float">
-              {/* Phone frame */}
-              <div className="w-64 bg-dark-700 rounded-[48px] border-4 border-dark-500 shadow-2xl shadow-primary-900/50 overflow-hidden">
-                {/* Status bar */}
-                <div className="bg-dark-800 px-6 pt-4 pb-2 flex justify-between text-xs text-gray-500">
-                  <span>9:41</span><span>●●●</span>
-                </div>
-                {/* App screen */}
-                <div className="bg-dark-800 px-4 pb-6">
-                  {/* App header */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent flex items-center justify-center text-white font-bold text-sm">BNB</div>
-                    <div>
-                      <div className="text-white text-sm font-semibold">BNB Dafatery</div>
-                      <div className="text-xs text-gray-500">Personal Finance</div>
-                    </div>
-                    <div className="ml-auto text-yellow-400 text-xs font-bold">4.9★</div>
-                  </div>
-                  {/* Balance */}
-                  <div className="text-center mb-4">
-                    <div className="text-xs text-gray-500 mb-1">Total Balance</div>
-                    <div className="text-3xl font-black text-white">EGP 12,450</div>
-                  </div>
-                  {/* Chart */}
-                  <div className="flex items-end gap-1.5 justify-center h-16 mb-4">
-                    {[60,80,50,90,75,65,85].map((h, i) => (
-                      <div key={i} className={`flex-1 rounded-t-sm transition-all ${i === 3 ? 'bg-primary-500' : 'bg-primary-900/60'}`} style={{ height: `${h}%` }} />
-                    ))}
-                  </div>
-                  {/* Transactions */}
-                  <div className="space-y-2">
-                    {[
-                      { name: 'Salary', amt: '+5,000', color: 'text-green-400' },
-                      { name: 'Rent', amt: '-2,500', color: 'text-red-400' },
-                      { name: 'Freelance', amt: '+1,200', color: 'text-green-400' },
-                    ].map(tx => (
-                      <div key={tx.name} className="flex justify-between text-xs">
-                        <span className="text-gray-400">{tx.name}</span>
-                        <span className={`font-semibold ${tx.color}`}>{tx.amt}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                {/* Home indicator */}
-                <div className="bg-dark-700 flex justify-center pb-3 pt-2">
-                  <div className="w-24 h-1 rounded-full bg-gray-600" />
-                </div>
-              </div>
+                <MobileMockup />
             </div>
             {/* Glow ring */}
-            <div className="absolute -inset-4 rounded-[56px] border border-primary-500/20 -z-10" />
-            <div className="absolute -inset-8 rounded-[64px] border border-primary-500/10 -z-10" />
+            <div className="absolute -inset-4 rounded-[56px] border border-cyan-500/20 -z-10" />
+            <div className="absolute -inset-8 rounded-[64px] border border-blue-500/10 -z-10" />
           </div>
         </motion.div>
       </div>

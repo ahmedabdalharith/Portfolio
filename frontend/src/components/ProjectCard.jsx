@@ -16,9 +16,18 @@ export default function ProjectCard({ project, index = 0 }) {
 
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
-        <h3 className="text-white font-bold text-lg leading-tight group-hover:text-primary-400 transition-colors">
-          {project.title}
-        </h3>
+        <div className="flex items-center gap-3">
+            {project.iconUrl ? (
+                <img src={project.iconUrl} alt={project.title} className="w-12 h-12 rounded-xl object-cover border border-slate-700 shadow-lg" />
+            ) : (
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-900 to-accent/20 border border-primary-500/20 flex items-center justify-center text-primary-400 font-bold text-lg">
+                    {project.title.charAt(0)}
+                </div>
+            )}
+            <h3 className="text-white font-bold text-lg leading-tight group-hover:text-primary-400 transition-colors">
+              {project.title}
+            </h3>
+        </div>
         {project.playStoreUrl && (
           <a
             href={project.playStoreUrl}

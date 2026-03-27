@@ -24,7 +24,7 @@
     @apply inline-flex items-center gap-2 border border-primary-500/40 hover:border-primary-400 text-primary-300 hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:-translate-y-0.5;
   }
   .glass-card {
-    @apply bg-dark-700/60 backdrop-blur-md border border-white/5 rounded-2xl;
+    @apply bg-dark-700/60 backdrop-blur-md border border-white/5 rounded-2xl hover:border-primary-500/30 hover:shadow-[0_0_30px_-5px_rgba(0,240,255,0.15)] transition-all duration-500;
   }
   .tag {
     @apply text-xs font-mono bg-primary-900/60 text-primary-300 border border-primary-800/50 px-2.5 py-1 rounded-full;

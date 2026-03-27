@@ -72,6 +72,12 @@ function ProjectModal({ project, onClose, onSave, isSaving }) {
           </div>
 
           <div>
+            <label className="text-gray-400 text-sm font-medium block mb-1.5">App ID (Google Play)</label>
+            <input id="projectAppId" {...register('appId')} className="input-field" placeholder="com.example.app" />
+            <p className="text-gray-600 text-xs mt-1">If provided, will scrape Icon, Rating, and Downloads automatically</p>
+          </div>
+
+          <div>
             <label className="text-gray-400 text-sm font-medium block mb-1.5">Play Store URL</label>
             <input id="projectUrl" {...register('playStoreUrl')} className="input-field" placeholder="https://play.google.com/..." />
           </div>
